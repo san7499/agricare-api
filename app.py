@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # ✅ FIXED MODEL LOADING
 model = tf.keras.models.load_model(
-    "final_efficientnetb3_model.keras",
+    "final_efficientnetb3_model.h5",
     compile=False,
     safe_mode=False
 )
