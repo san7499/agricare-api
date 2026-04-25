@@ -9,8 +9,12 @@ import json
 
 app = Flask(__name__)
 
-# ------------------ LOAD MODEL ------------------
-model = tf.keras.models.load_model("final_efficientnetb3_model.keras")
+# ✅ FIXED MODEL LOADING
+model = tf.keras.models.load_model(
+    "final_efficientnetb3_model.keras",
+    compile=False,
+    safe_mode=False
+)
 
 # Load class labels
 with open("class_indices.json") as f:
@@ -201,9 +205,10 @@ treatment_suggestions = {
     }
 }
 
-# ------------------ PREDICTION FUNCTION ------------------
+
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
+# ------------------ PREDICT FUNCTION ------------------
 def predict_disease(img):
     img = Image.open(img)
     img = ImageOps.exif_transpose(img)
