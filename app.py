@@ -15,6 +15,7 @@ model = tf.keras.models.load_model(
     compile=False,
     safe_mode=False
 )
+model.make_predict_function()
 
 # Load class labels
 with open("class_indices.json") as f:
@@ -266,4 +267,5 @@ def predict():
 
 # ------------------ RUN ------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
